@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
-import { LoginPage } from './components/pages/Loginpage';
-import { Main } from './components/pages/Main';
+import { LoginPage } from './pages/Loginpage';
+import { Main } from './pages/Main';
 import { RequireAuth } from './components/hoc/RequireAuth';
 import { AuthProvider } from './components/hoc/AuthProvider';
+import './App.scss';
 
 function App() {
   return (
