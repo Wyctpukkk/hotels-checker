@@ -20,19 +20,19 @@ export const LoginPage = () => {
 
   return (
     <>
-      <div class="background">
-        <div class="background__filter"></div>
+      <div className="background">
+        <div className="background__filter"></div>
       </div>
-      <div class="login">
-        <p class="login__title">Simple Hotel Check</p>
-        <form class="login__form" onSubmit={handleSubmit}>
-          <label class="login__label">
-            Логин <input class="login__input" name="username"></input>
+      <div className="login">
+        <p className="login__title">Simple Hotel Check</p>
+        <form className="login__form" onSubmit={handleSubmit}>
+          <label className="login__label">
+            Логин <input className="login__input" name="username"></input>
           </label>
-          <label class="login__label">
-            Пароль <input class="login__input" name="password"></input>
+          <label className="login__label">
+            Пароль <input className="login__input" name="password"></input>
           </label>
-          <button class="login__btn" type="submit">
+          <button className="login__btn" type="submit">
             Войти
           </button>
         </form>
