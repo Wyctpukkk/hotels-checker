@@ -9,18 +9,6 @@ import exit from '../img/exit.png';
 export const Main = () => {
   const navigate = useNavigate();
   const { signout } = useAuth();
-  const [hotels, setHotels] = useState([]);
-
-  useEffect(() => {
-    async function getHotels() {
-      let getHotelList = await fetch(
-        `http://engine.hotellook.com/api/v2/cache.json?location=${'Moscow'}&currency=rub&checkIn=${'2023-03-10'}&checkOut=${'2023-03-12'}&limit=10`
-      );
-      let hotelList = await getHotelList.json();
-      setHotels(hotelList);
-    }
-    getHotels();
-  }, []);
 
   return (
     <>
@@ -38,7 +26,7 @@ export const Main = () => {
           <Filter />
           <Favorite />
         </aside>
-        <Result hotels={hotels} />
+        <Result />
       </section>
     </>
   );
