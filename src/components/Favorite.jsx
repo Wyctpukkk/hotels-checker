@@ -1,9 +1,18 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import select from '../img/select.png';
-import star from '../img/star.png';
-import heartFill from '../img/heart.png';
 
 export const Favorite = () => {
+  const store = useSelector((state) => state);
+  const arr = store.favor;
+  const dispatch = useDispatch();
+
+  function stateFavorite(boolean, obj) {
+    if (boolean) {
+      dispatch({ type: 'DEL_FAVOR', payload: obj });
+    } else dispatch({ type: 'ADD_FAVOR', payload: obj });
+  }
+
   return (
     <article className="favorite">
       <p className="favorite__title">Избранное</p>
@@ -20,22 +29,33 @@ export const Favorite = () => {
         </button>
       </div>
       <ul className="favorite__list">
-        <li className="favorite__item item">
-          <div className="item__title">
-            <p>Moscow Marriott Grand Hotel</p>
-            <img src={heartFill} />
-          </div>
-          <div className="item__date">
-            <span>28 June, 2020</span>
-            <span>1 день</span>
-          </div>
-          <div className="item__price">
-            <img src={star} />
-            <p>
-              Price: <span>23 924 ₽</span>
-            </p>
-          </div>
-        </li>
+        {arr.map((obj, id) => {
+          return (
+            <li key={id} className="favorite__item item">
+              <div className="item__title">
+                <p>{obj.hotelName}</p>
+                <button
+                  className={`item__img ${obj.isActive}`}
+                  onClick={(e) => {
+                    stateFavorite(e.target.classList.contains('active'), obj);
+                  }}
+                ></button>
+              </div>
+              <div className="item__date">
+                <span>{obj.checkIn}</span>
+                <span>{obj.count} день</span>
+              </div>
+              <div className="item__price">
+                <div className="item__stars ">
+                  <div className={`star_${obj.stars}`}></div>
+                </div>
+                <p>
+                  Price: <span>{obj.priceFrom}</span>
+                </p>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </article>
   );

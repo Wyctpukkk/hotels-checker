@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuth } from '../components/hook/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { Filter } from '../components/Filter';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { defaultChekIn, dayCount } from './timeFunc/timeFunc';
 
 export const Filter = () => {
@@ -8,23 +8,20 @@ export const Filter = () => {
   const [checkIn, setCheckIn] = useState(defaultChekIn());
   const [count, setCount] = useState(1);
   const [checkOut, setCheckOut] = useState(dayCount(1, checkIn));
-  const store = useSelector((store) => store);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    store.location = location;
-    store.checkIn = checkIn;
-    store.checkOut = checkOut;
-    store.count = count;
-    dispatch({ type: 'LOAD_HOTELS', payload: store });
+    dispatch({
+      type: 'LOAD_HOTELS',
+      payload: { location, checkIn, checkOut, count },
+    });
   }, []);
 
   function refreshSearch() {
-    store.location = location;
-    store.checkIn = checkIn;
-    store.checkOut = checkOut;
-    store.count = count;
-    dispatch({ type: 'LOAD_HOTELS', payload: store });
+    dispatch({
+      type: 'LOAD_HOTELS',
+      payload: { location, checkIn, checkOut, count },
+    });
   }
 
   return (
@@ -59,7 +56,7 @@ export const Filter = () => {
             type="number"
             name="days"
             onChange={(e) => {
-              setCount(e.target.value);
+              setCount(+e.target.value);
               setCheckOut(dayCount(+e.target.value, checkIn));
             }}
           ></input>

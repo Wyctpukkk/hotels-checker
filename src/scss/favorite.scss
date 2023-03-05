@@ -6,7 +6,7 @@
   padding: 32px;
   gap: 32px;
   width: 360px;
-  height: 472px;
+  min-height: 472px;
   background: #ffffff;
   box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
   border-radius: 16px;
@@ -60,10 +60,13 @@
   &__list {
     position: relative;
     width: 100%;
+    margin-top: -40px;
   }
   &__item {
   }
   .item {
+    position: relative;
+    margin: 20px 0 10px 0;
     &::after {
       position: absolute;
       bottom: -8px;
@@ -83,7 +86,22 @@
       line-height: 22px;
       letter-spacing: -0.408px;
       color: #424242;
+      p {
+        width: 273px;
+      }
       img {
+        width: 21px;
+        height: 18px;
+      }
+    }
+    &__img {
+      border: none;
+      background: center url(../img/heart-empty.png);
+      width: 22px;
+      height: 19px;
+      &.active {
+        border: none;
+        background: center url(../img/heart.png);
         width: 21px;
         height: 18px;
       }
@@ -129,6 +147,36 @@
         text-align: right;
         letter-spacing: -0.408px;
         color: #424242;
+      }
+    }
+    &__stars {
+      background: center url(../img/star.png);
+      width: 86px;
+      height: 16px;
+      .star_1 {
+        background: url(../img/star-fill.png);
+        width: 17px;
+        height: 16px;
+      }
+      .star_2 {
+        background: url(../img/star-fill.png);
+        width: 35px;
+        height: 16px;
+      }
+      .star_3 {
+        background: url(../img/star-fill.png);
+        width: 51px;
+        height: 16px;
+      }
+      .star_4 {
+        background: url(../img/star-fill.png);
+        width: 69px;
+        height: 16px;
+      }
+      .star_5 {
+        background: url(../img/star-fill.png);
+        width: -1px;
+        height: 16px;
       }
     }
   }

@@ -1,10 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import homeImg from '../img/house.png';
 
 export const Result = () => {
   const store = useSelector((state) => state);
   const array = store.hotels;
+  const dispatch = useDispatch();
+
+  function stateFavorite(boolean, obj) {
+    if (boolean) {
+      dispatch({ type: 'DEL_FAVOR', payload: obj });
+    } else dispatch({ type: 'ADD_FAVOR', payload: obj });
+  }
 
   return (
     <article className="result">
@@ -14,7 +21,7 @@ export const Result = () => {
       </div>
       <div className="result__slider"></div>
       <span className="result__favorite-info">
-        Добавлено в Избранное: 3 отеля
+        Добавлено в Избранное: {store.favor.length} отеля
       </span>
       <ul className="favorite__list">
         {array.map((obj, id) => {
@@ -25,7 +32,12 @@ export const Result = () => {
               </div>
               <div className="item__title">
                 <p>{obj.hotelName}</p>
-                <button className="item__img"></button>
+                <button
+                  className={`item__img ${obj.isActive}`}
+                  onClick={(e) => {
+                    stateFavorite(e.target.classList.contains('active'), obj);
+                  }}
+                ></button>
               </div>
               <div className="item__date">
                 <span>{store.checkIn}</span>
