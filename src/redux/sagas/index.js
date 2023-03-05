@@ -10,7 +10,7 @@ export function* loadHotelsList({ payload }) {
   );
   const data = yield apply(request, request.json);
 
-  data.map((obj, id) => {
+  data.map((obj, _) => {
     obj.isActive = '';
     obj.checkIn = checkIn;
     obj.count = +count;
@@ -57,7 +57,7 @@ export function* delFavorite({ payload }) {
   const { checkIn, count, hotelId } = payload;
 
   const data1 = state.favor.filter(
-    (obj, id) =>
+    (obj, _) =>
       obj.hotelId !== hotelId || obj.checkIn !== checkIn || obj.count !== count
   );
   const data2 = state.hotels.map((obj, id) => {
@@ -75,7 +75,18 @@ export function* delFavorite({ payload }) {
   yield put({ type: 'LOAD_HOTELS_SUCCESS', payload: data2 });
 }
 
+export function* sortFavorite({ payload }) {
+  const { key, type } = payload;
+  const state = yield select((store) => store);
+  const sorted = type
+    ? state.favor.sort((fav1, fav2) => (fav1[key] > fav2[key] ? 1 : -1))
+    : state.favor.sort((fav1, fav2) => (fav1[key] > fav2[key] ? -1 : 1));
+
+  yield put({ type: 'SORT_FAVOR_SUCCESS', payload: sorted });
+}
+
 export default function* rootSaga() {
+  yield takeEvery('SORT_FAVOR', sortFavorite);
   yield takeEvery('DEL_FAVOR', delFavorite);
   yield takeEvery('ADD_FAVOR', addFavorite);
   yield takeEvery('LOAD_HOTELS', loadHotelsList);

@@ -48,6 +48,17 @@ export default function reducer(state = initial, action) {
         favor: action.payload,
       };
     }
+    case 'SORT_FAVOR': {
+      return {
+        ...state,
+      };
+    }
+    case 'SORT_FAVOR_SUCCESS': {
+      return {
+        ...state,
+        favor: action.payload,
+      };
+    }
 
     default:
       return state;
