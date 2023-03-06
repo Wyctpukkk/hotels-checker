@@ -11,6 +11,7 @@ const initial = {
     require('../../img/slider3.png'),
     require('../../img/slider1.png'),
   ],
+  user: '',
 };
 
 export default function reducer(state = initial, action) {
@@ -26,43 +27,77 @@ export default function reducer(state = initial, action) {
         count,
       };
     }
+
     case 'LOAD_HOTELS_SUCCESS': {
       return {
         ...state,
         hotels: action.payload,
       };
     }
+
     case 'ADD_FAVOR': {
       return {
         ...state,
       };
     }
+
     case 'ADD_FAVOR_SUCCESS': {
       return {
         ...state,
         favor: [...state.favor, action.payload],
       };
     }
+
     case 'DEL_FAVOR': {
       return {
         ...state,
       };
     }
+
     case 'DEL_FAVOR_SUCCESS': {
       return {
         ...state,
         favor: action.payload,
       };
     }
+
     case 'SORT_FAVOR': {
       return {
         ...state,
       };
     }
+
     case 'SORT_FAVOR_SUCCESS': {
       return {
         ...state,
         favor: action.payload,
+      };
+    }
+
+    case 'SET_USER': {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+
+    case 'CHECK_USER': {
+      return {
+        ...state,
+      };
+    }
+
+    case 'CHECK_USER_SUCCESS': {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+
+    case 'DEL_USER': {
+      return {
+        ...state,
+        user: '',
       };
     }
 

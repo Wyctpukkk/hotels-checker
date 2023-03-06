@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import homeImg from '../img/house.png';
 import arrowImg from '../img/vector.png';
 import { Slider } from './Slider';
-import { num_word, name_month } from './timeFunc/timeFunc';
+import { num_word, name_month } from './functions/functions';
 
 export const Result = () => {
   const store = useSelector((state) => state);
@@ -11,6 +11,7 @@ export const Result = () => {
   const slider = store.slider;
   const dispatch = useDispatch();
 
+  // добавление/удаление из Избранных в зависимости от состояния иконки
   function stateFavorite(boolean, obj) {
     if (boolean) {
       dispatch({ type: 'DEL_FAVOR', payload: obj });

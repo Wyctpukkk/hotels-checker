@@ -1,34 +1,26 @@
 import { Routes, Route } from 'react-router-dom';
 import { LoginPage } from './pages/Loginpage';
 import { Main } from './pages/Main';
-import { RequireAuth } from './components/hoc/RequireAuth';
-import { AuthProvider } from './components/hoc/AuthProvider';
 import './App.scss';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state);
+
+  useEffect(() => {
+    dispatch({
+      type: 'CHECK_USER',
+    });
+  }, []);
+
   return (
     <div className="App">
-      <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="*"
-            element={
-              <RequireAuth>
-                <Main />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <RequireAuth>
-                <Main />
-              </RequireAuth>
-            }
-          />
-        </Routes>
-      </AuthProvider>
+      <Routes>
+        <Route path="/" element={store.user ? <Main /> : <LoginPage />} />
+        <Route path="*" element={store.user ? <Main /> : <LoginPage />} />
+      </Routes>
     </div>
   );
 }

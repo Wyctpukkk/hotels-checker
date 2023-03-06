@@ -9,12 +9,14 @@ export const Favorite = () => {
   const [type, setType] = useState(0);
   const [category, setCategory] = useState('');
 
+  // добавление/удаление из Избранных в зависимости от состояния иконки
   function stateFavorite(boolean, obj) {
     if (boolean) {
       dispatch({ type: 'DEL_FAVOR', payload: obj });
     } else dispatch({ type: 'ADD_FAVOR', payload: obj });
   }
 
+  // вызов сортировки
   function sortFavorite(value) {
     value ? setCategory('stars') : setCategory('priceFrom');
     const obj = {

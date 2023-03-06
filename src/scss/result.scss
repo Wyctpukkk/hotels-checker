@@ -27,19 +27,7 @@
       margin: 0px 15px 0px 15px;
     }
   }
-  &__slider {
-    margin: 28px 0 0 0;
-    display: flex;
-    overflow: scroll;
-    .result__slider-item {
-      margin: 5px;
-      cursor: grab;
-    }
-    &::-webkit-scrollbar {
-      width: 0;
-      background: transparent;
-    }
-  }
+
   &__favorite-info {
     display: block;
     font-weight: 300;
@@ -48,10 +36,6 @@
     letter-spacing: -0.408px;
     color: #424242;
     margin-bottom: 49px;
-  }
-  &__list {
-  }
-  &__item {
   }
   .item {
     position: relative;

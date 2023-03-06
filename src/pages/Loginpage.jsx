@@ -1,22 +1,41 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/hook/useAuth';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
-  const { signin } = useAuth();
+  const dispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [nameWrong, setNameWrong] = useState('');
+  const [pass, setPass] = useState('');
+  const [passWrong, setPassWrong] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const user = form.username.value;
-    const password = form.password.value;
-    const regexp = /[^a-z]/;
-    password.length >= 8 &&
-    !password.toLowerCase().match(regexp) &&
-    user.includes('@')
-      ? signin(user, () => navigate('/'))
-      : alert('не правильный логин или пароль');
-  };
+  useEffect(() => {
+    // регулярные выражения
+    const regexpPass = /^[а-я]/;
+    const regexpName =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    // валидация name
+    name.toLowerCase().match(regexpName) || name === ''
+      ? setNameWrong('')
+      : setNameWrong('Не корректный @email');
+
+    // валидация пасс
+    pass.length < 8 && pass !== ''
+      ? setPassWrong('Менее 8 символов')
+      : pass.match(regexpPass)
+      ? setPassWrong('Содержит кириллицу')
+      : setPassWrong('');
+  }, [pass, name]);
+
+  function sendUser() {
+    // валидация name и pass + добавление USER в Storage
+    !nameWrong && !passWrong && pass !== '' && name !== ''
+      ? dispatch({
+          type: 'SET_USER',
+          payload: name,
+        })
+      : console.log('x');
+  }
 
   return (
     <>
@@ -25,17 +44,27 @@ export const LoginPage = () => {
       </div>
       <div className="login">
         <p className="login__title">Simple Hotel Check</p>
-        <form className="login__form" onSubmit={handleSubmit}>
+        <div className="login__form">
           <label className="login__label">
-            Логин <input className="login__input" name="username"></input>
+            Логин
+            <input
+              className="login__input"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <span>{nameWrong}</span>
           </label>
           <label className="login__label">
-            Пароль <input className="login__input" name="password"></input>
+            Пароль
+            <input
+              className="login__input"
+              onChange={(e) => setPass(e.target.value)}
+            />
+            <span>{passWrong}</span>
           </label>
-          <button className="login__btn" type="submit">
+          <button className="login__btn" onClick={() => sendUser()}>
             Войти
           </button>
-        </form>
+        </div>
       </div>
     </>
   );

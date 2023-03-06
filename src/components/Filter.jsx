@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { defaultChekIn, dayCount } from './timeFunc/timeFunc';
+import { defaultChekIn, dayCount } from './functions/functions';
 
 export const Filter = () => {
   const [location, setLocation] = useState('Москва');
@@ -10,6 +10,7 @@ export const Filter = () => {
   const [checkOut, setCheckOut] = useState(dayCount(1, checkIn));
   const dispatch = useDispatch();
 
+  // первичный вызов отелей для отрисовки
   useEffect(() => {
     dispatch({
       type: 'LOAD_HOTELS',
@@ -17,6 +18,7 @@ export const Filter = () => {
     });
   }, []);
 
+  // поиск новых отелей
   function refreshSearch() {
     dispatch({
       type: 'LOAD_HOTELS',
