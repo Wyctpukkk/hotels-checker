@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { defaultChekIn, dayCount } from './timeFunc/timeFunc';
 
 export const Filter = () => {
-  const [location, setLocation] = useState('Moscow');
+  const [location, setLocation] = useState('Москва');
   const [checkIn, setCheckIn] = useState(defaultChekIn());
   const [count, setCount] = useState(1);
   const [checkOut, setCheckOut] = useState(dayCount(1, checkIn));
