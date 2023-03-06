@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import homeImg from '../img/house.png';
+import { Slider } from './Slider';
 
 export const Result = () => {
   const store = useSelector((state) => state);
   const array = store.hotels;
+  const slider = store.slider;
   const dispatch = useDispatch();
 
   function stateFavorite(boolean, obj) {
@@ -19,7 +21,7 @@ export const Result = () => {
         <span>{`Отели ${store.location}`}</span>
         <span>{store.checkIn}</span>
       </div>
-      <div className="result__slider"></div>
+      <Slider slider={slider} />
       <span className="result__favorite-info">
         Добавлено в Избранное: {store.favor.length} отеля
       </span>

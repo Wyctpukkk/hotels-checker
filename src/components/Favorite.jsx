@@ -7,7 +7,7 @@ export const Favorite = () => {
   const arr = store.favor;
   const dispatch = useDispatch();
   const [type, setType] = useState(0);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('stars');
 
   function stateFavorite(boolean, obj) {
     if (boolean) {

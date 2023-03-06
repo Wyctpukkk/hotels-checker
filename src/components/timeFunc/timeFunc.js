@@ -21,3 +21,12 @@ export function dayCount(count, checkIn) {
 
   return year + '-' + month + '-' + day;
 }
+
+// export function num_word(value: number, words: string[]) {
+//   value = Math.abs(value) % 100;
+//   var num = value % 10;
+//   if (value > 10 && value < 20) return `${value} ${words[2]} `
+//   if (num > 1 && num < 5) return `${value} ${words[1]} `
+//   if (num == 1) return `${value} ${words[0]} `
+//   return `${value} ${words[2]} `;
+// }
